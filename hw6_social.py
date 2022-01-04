@@ -36,8 +36,13 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
-
+    start = fromString.find("From") + \
+    len("From: ")
+    fromString = fromString[start:]
+    end = fromString.find(" (")
+    fromString = fromString[:end]
+    fromString = fromString.strip()
+    return fromString
 
 '''
 parsePosition(fromString)
@@ -46,7 +51,13 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    start = fromString.find("(") + \
+    len("(")
+    fromString = fromString[start:]
+    end = fromString.find(" from")
+    fromString = fromString[:end]
+    fromString = fromString.strip()
+    return fromString
 
 
 '''
@@ -56,7 +67,14 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    start = fromString.find("from") + \
+    len("from")
+    fromString = fromString[start:]
+    end = fromString.find(")")
+    fromString = fromString[:end]
+    fromString = fromString.strip()
+    return fromString
+
 
 
 '''
@@ -268,6 +286,9 @@ if __name__ == "__main__":
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
     test.testMakeDataFrame()
+    test.testParseName()
+    test.testParsePosition()
+    test.testParseState()
 
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
