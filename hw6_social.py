@@ -330,7 +330,8 @@ if __name__ == "__main__":
     test.testParsePosition()
     test.testParseState()
     test.testFindHashtags()
-
+    test.testGetRegionFromState()
+    test.testAddColumns()
     ## Uncomment these for Week 2 ##
     """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     test.week2Tests()
