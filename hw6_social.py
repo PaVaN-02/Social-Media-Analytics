@@ -110,7 +110,8 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    locn= stateDf.loc[stateDf['state'] == state, 'region'] 
+    return locn.values[0]
 
 
 '''
@@ -120,7 +121,30 @@ Parameters: dataframe ; dataframe
 Returns: None
 '''
 def addColumns(data, stateDf):
-    return
+    names=[]
+    positions=[]
+    states=[] 
+    regions=[]
+    hashtags=[]
+    for  index, row in data.iterrows():
+        value=row['label']
+        name=parseName(value)
+        position=parsePosition(value)
+        state=parseState(value)
+        region=getRegionFromState(stateDf,state)
+        text=row['text']
+        hashtag=findHashtags(text)
+        names.append(name)
+        positions.append(position)
+        states.append(state)
+        regions.append(region)
+        hashtags.append(hashtag)
+    data['name']=names
+    data['position']=positions
+    data['state']=states
+    data['region']=regions
+    data['hashtags']=hashtags
+    return None
 
 
 ### PART 2 ###
