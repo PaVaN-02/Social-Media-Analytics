@@ -212,8 +212,14 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
-
+    outerDict={}
+    for  index, row in data.iterrows():
+        if row['region'] not in outerDict:
+           outerDict[row['region']]={}
+        if row[colName] not in  outerDict[row['region']]:
+            outerDict[row['region']][row[colName]]=0
+        outerDict[row['region']][row[colName]]+=1
+    return outerDict
 
 '''
 getHashtagRates(data)
@@ -349,13 +355,13 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testMakeDataFrame()
-    test.testParseName()
-    test.testParsePosition()
-    test.testParseState()
-    test.testFindHashtags()
-    test.testGetRegionFromState()
-    test.testAddColumns()
+    # test.testMakeDataFrame()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
+    # test.testFindHashtags()
+    # test.testGetRegionFromState()
+    # test.testAddColumns()
     ## Uncomment these for Week 2 ##
     # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
     # test.week2Tests()
@@ -365,9 +371,10 @@ if __name__ == "__main__":
     stateDf = makeDataFrame("data/statemappings.csv")
     addColumns(df, stateDf)
     addSentimentColumn(df)
-    test.testFindSentiment()
-    test.testAddSentimentColumn()
-    test.testGetDataCountByState(df)
+    # test.testFindSentiment()
+    # test.testAddSentimentColumn()
+    # test.testGetDataCountByState(df)
+    test.testGetDataForRegion(df)
 
     # ## Uncomment these for Week 3 ##
     # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
