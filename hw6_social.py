@@ -85,23 +85,20 @@ Returns: list of strs
 '''
 def findHashtags(message):
     hashtags=[]
-    words=[]
-    new=[]
-    chars =  "[@_!$%^&*`;+=(.,)<->?/\|}'{~:]"
-    for i in chars:
-        if i in message:
-           message=  message.replace(i," ")
-    words= message.split()
-    for i in range(len(words)):
-        if words[i][0]=="#":
-            if words[i].count("#")>1:
-               new=words[i].split("#",2)
-               for j in range(1,len(new)):
-                  new[j]="#"+new[j]
-                  hashtags.append(new[j])
-            else: hashtags.append(words[i])
+    hashtag="#"
+    list2=[]
+    list=message.split("#")
+    for i in range(1,len(list)):
+        list2.append(list[i])
+    for word in list2:
+        for char in word:
+            if char in endChars: 
+                break
+            else: 
+                hashtag+=char      
+        hashtags.append(hashtag)
+        hashtag="#"
     return hashtags
-
 
 '''
 getRegionFromState(stateDf, state)
@@ -228,7 +225,15 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-    return
+    hashDict = {}
+    for index,row in data.iterrows():
+        if(row['hashtags']!=[]):
+            for i in row['hashtags']:
+                if i not in hashDict:
+                    hashDict[i]=1
+                else:
+                    hashDict[i]=hashDict[i]+1          
+    return hashDict
 
 
 '''
@@ -374,7 +379,8 @@ if __name__ == "__main__":
     # test.testFindSentiment()
     # test.testAddSentimentColumn()
     # test.testGetDataCountByState(df)
-    test.testGetDataForRegion(df)
+    # test.testGetDataForRegion(df)
+    test.testGetHashtagRates(df)
 
     # ## Uncomment these for Week 3 ##
     # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
