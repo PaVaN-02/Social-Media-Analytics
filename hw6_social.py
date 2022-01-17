@@ -85,22 +85,22 @@ Returns: list of strs
 '''
 def findHashtags(message):
     hashtags=[]
-    words=[]
-    new=[]
-    chars =  "[@_!$%^&*`;+=(.,)<->?/\|}'{~:]"
-    for i in chars:
-        if i in message:
-           message=  message.replace(i," ")
-    words= message.split()
-    for i in range(len(words)):
-        if words[i][0]=="#":
-            if words[i].count("#")>1:
-               new=words[i].split("#",2)
-               for j in range(1,len(new)):
-                  new[j]="#"+new[j]
-                  hashtags.append(new[j])
-            else: hashtags.append(words[i])
+    hashtag="#"
+    list2=[]
+    list=message.split("#")
+    for i in range(1,len(list)):
+        list2.append(list[i])
+
+    for word in list2:
+        for char in word:
+            if char in endChars:
+                break
+            else: 
+                hashtag+=char       
+        hashtags.append(hashtag)
+        hashtag="#"
     return hashtags
+    
 
 
 '''
@@ -301,18 +301,18 @@ if __name__ == "__main__":
     # test.week1Tests()
     # print("\n" + "#"*15 + " WEEK 1 OUTPUT " + "#" * 15 + "\n")
     # test.runWeek1()
-    test.testMakeDataFrame()
-    test.testParseName()
-    test.testParsePosition()
-    test.testParseState()
+    # test.testMakeDataFrame()
+    # test.testParseName()
+    # test.testParsePosition()
+    # test.testParseState()
     test.testFindHashtags()
 
     ## Uncomment these for Week 2 ##
-    """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
-    test.week2Tests()
-    print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek2()"""
+    # """print("\n" + "#"*15 + " WEEK 2 TESTS " +  "#" * 16 + "\n")
+    # test.week2Tests()
+    # print("\n" + "#"*15 + " WEEK 2 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek2()"""
 
-    ## Uncomment these for Week 3 ##
-    """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    test.runWeek3()"""
+    # ## Uncomment these for Week 3 ##
+    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    # test.runWeek3()"""
