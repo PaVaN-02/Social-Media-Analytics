@@ -278,7 +278,13 @@ Returns: None
 '''
 def graphStateCounts(stateCounts, title):
     import matplotlib.pyplot as plt
-    return
+    states=stateCounts.keys()
+    counts=stateCounts.values()
+    plt.bar(states,counts)
+    plt.xticks(rotation ='vertical')
+    plt.title(title)
+    plt.show()
+    return None
 
 
 '''
@@ -394,8 +400,8 @@ if __name__ == "__main__":
     # test.testGetDataForRegion(df)
     # test.testGetHashtagRates(df)
     # test.testMostCommonHashtags(df)
-    test.testGetHashtagSentiment(df)
+    # test.testGetHashtagSentiment(df)
 
-    # ## Uncomment these for Week 3 ##
-    # """print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
-    # test.runWeek3()"""
+    ## Uncomment these for Week 3 ##
+    print("\n" + "#"*15 + " WEEK 3 OUTPUT " + "#" * 15 + "\n")
+    test.runWeek3()
