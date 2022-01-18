@@ -347,7 +347,35 @@ Parameters: dataframe
 Returns: None
 '''
 def graphHashtagSentimentByFrequency(data):
-    return
+    hashRateDict=getHashtagRates(data)
+    commonHashDict=mostCommonHashtags(hashRateDict,50)
+    title="hashtag sentiment vs frequency"
+    hashtags=[]
+    temp=[]
+    frequencies=[]
+    sentimentScores=[]
+    d={}
+    for key, value in commonHashDict.items():
+        temp2=[]
+        temp2.append(key)
+        temp2.append(value)
+        sentiment= getHashtagSentiment(data,key)
+        temp2.append(sentiment)
+        temp.append(temp2)
+        temp3=(value,sentiment)
+        if(temp3 in d):
+            d[temp3]=d[temp3]+" "+key
+        else:
+            d[temp3]=key
+    frequency=[]
+    sentiments=[]
+    hashtags=list(d.values())
+    for i in d.keys():
+        frequency.append(i[0])
+        sentiments.append(i[1])
+    frequencies=list(frequency)
+    sentimentScores=list(sentiments)
+    return None
 
 
 #### PART 3 PROVIDED CODE ####
